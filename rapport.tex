@@ -1,0 +1,150 @@
+\documentclass[11pt]{report}
+\usepackage[a4paper]{geometry}
+\usepackage[myheadings]{fullpage}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage{sectsty}
+\usepackage{url, lipsum}
+\usepackage{mathptmx}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\pagestyle{plain}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\onehalfspacing
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+\renewcommand{\thesection}{\arabic{section}}
+
+
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+\title
+{
+	\HRule{2pt} \\ [0.5cm]
+	\LARGE \textbf{\uppercase{Projet technologique}}
+	\HRule{2pt} \\ [0.5cm]
+	\normalsize \today
+}
+
+\date{}
+
+\author
+{
+	\LARGE{Université de Bordeaux} \\
+	\\
+    Enzo PERUZZETTO \\
+}
+
+\maketitle
+%-------------------------------------------------------------------------------
+% Table des matières
+%-------------------------------------------------------------------------------
+
+\tableofcontents
+\newpage
+
+%-------------------------------------------------------------------------------
+% Présentation du projet - Introduction
+%-------------------------------------------------------------------------------
+
+\renewcommand{\thesection}{\arabic{section}}
+
+\section{Présentation du projet}
+	\emph{ Web et base de données : un outil pour les seniors et personnes handicapées}\\
+
+Les collectivités locales, les mairies par exemple, communiquent largement via Internet. Cependant des publics comme les séniors ou les personnes handicapées n'ont pas un accès simple aux informations spécifiques qui les intéressent sur les sites de ces collectivités et il est souhaitable d'enrichir les services qui leur sont proposés sur le web.\\
+
+L'objectif du projet est donc de créer une base d’informations accessible et intuitive permettant aux personnes les moins à l’aise avec l’outil informatique de s'informer et de trouver une réponse à leurs questions. Voici des exemples de fonctionnalités : accès à l’ensemble des services pour les séniors et les personnes handicapées (aides à domicile, soins infirmiers, loisirs,. . . ), visualisation des services disponibles en les géolocalisant, accès à un espace où les personnes âgées ou leurs familles pourraient poser leurs questions, collecte et partage des propositions de bénévoles (petits travaux, aide aux transports, etc). En pratique, le projet consiste à développer un prototype livrable de site Internet accompagné de sa base de données.
+
+\newpage
+%---------------------------------------------------------------------------------
+%  Cahier des Charges
+%---------------------------------------------------------------------------------
+\section{Cahier des Charges}
+
+\subsection{Présentation de l'entreprise}
+
+La mairie de Bègles aimerait mettre en place sur leur site internet une application web permettant aux personnes agées et handicapés de pouvoir obtenir des informations sur certains services et (questionnement?).
+
+\subsection{besoins de la mairie}
+
+Mise en ligne d’une base d'informations recensant l’ensemble des services pour les séniors et les personnes handicapées:
+\begin{itemize}
+\item aides et accompagnement à domicile,
+\item soins infirmiers,
+\item loisirs,\\
+\end{itemize}
+
+
+Reliée au site internet de la ville, cette base de données permettrait de visualiser les services disponibles en les géo localisant.\\
+
+Créer un espace où les personnes âgées ou leurs familles pourraient poser leurs questions.
+Créer un espace pour rassembler les propositions des habitants de la commune qui souhaiteraient s’investir dans le bénévolat et notamment aider les plus âgées via des visites de courtoisie, de l’aide aux petits travaux, de l’aides aux transports, etc.
+
+\subsection{objectifs}
+
+Pour répondre à ses besoins, nous avons pensé aux services suivants:
+
+Créer une base d’informations accessible et intuitive permettant aux personnes les moins à l’aise avec l’outil informatique de trouver une réponse à leurs questions.
+
+Créer un outil pour les agents du service leur permettant de répertorier l’offre à destination de ce public et de suivre son évolution dans la commune.\\
+\subsection{besoin fonctionnel}
+
+Pour cela nous réaliserons les services suivants:
+\begin{itemize}
+\item Une base de donnée utilie pour la gestion d'utilisateur et des services
+\item Un espace d'identification
+\item Une carte localisant la position de l'utilisateur qui permettra la localisation et les informations des services
+\item Une liste de petite annonce pour demander leurs besoins.
+\end{itemize}
+\subsection{besoin non fonctionnel} %(organisation des pages PHP et SQL)
+
+
+%Décrire les pages accessibles, comment elles s’organisent (classes PHP ?), quelle est la bdd associée:
+%Publique Services disponibles
+%Admin Services disponibles
+%Publique Questions aux agents
+%Admin Questions aux agents
+%Publique Propositions (modéré)
+%Admin Propositions
+%modularite cote admin
+%---------------------------------------------------------------------------------
+% 
+%---------------------------------------------------------------------------------
+%\section{}
+
+%-------------------------------------------------------------------------------
+% 
+%-------------------------------------------------------------------------------
+
+%\section{}
+
+%-------------------------------------------------------------------------------
+% 
+%-------------------------------------------------------------------------------
+
+%\section{}
+
+%-------------------------------------------------------------------------------
+% 
+%-------------------------------------------------------------------------------
+
+%\section{}
+
+%-------------------------------------------------------------------------------
+% 
+%-------------------------------------------------------------------------------
+
+%\section{}
+
+\end{document}
