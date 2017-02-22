@@ -18,7 +18,7 @@ if ($websiteFunctions -> testIssetEmpty($POSTArray)
 	&& $websiteFunctions -> emailAlreadyExist($_POST["email"])) {
 	$nom = $_POST["nom"];
 	$prenom = $_POST["prenom"];
-	$birthdate = $_POST["birthdate"]; //need to explode "-" and format yyyy-mm-dd
+	$birthdate = date_create($_POST["birthdate"]); //need to explode "-" and format yyyy-mm-dd
 	$tel = $_POST["tel"];
 	$password = $_POST["password"];
 	$email = $_POST["email"];
