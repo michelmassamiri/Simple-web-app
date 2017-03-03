@@ -1,5 +1,5 @@
 <?php
-	$path = "/projet_techno/projet/site/";
+	$path = "";
 ?>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -9,7 +9,7 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="<?php echo $path; ?>index.php">Home</a></li>
 			<li><a href="<?php echo $path; ?>view/listusers.php">Liste des utilisateurs</a></li>
-			<li><a href="<?php echo $path; ?>view/users.php">Add User</a></li> 
+			<li><a href="<?php echo $path; ?>view/users.php">Add User</a></li>
 		</ul>
 	</div>
 </nav>
