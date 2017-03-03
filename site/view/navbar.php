@@ -1,5 +1,5 @@
 <?php
-	$path = "";
+	$path = "/projettechnotmpp/site/";
 ?>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
