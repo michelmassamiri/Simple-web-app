@@ -1,5 +1,5 @@
 <?php
-include ($_SERVER["DOCUMENT_ROOT"] . "/web2/controller/function.php");
+include ($_SERVER["DOCUMENT_ROOT"] . "/site/controller/function.php");
 
 /*@Description: This file is expecting a POST request containing variables needed to create a new user
  * POST variables(types): nom (string), prenom(string), birthdate(date), tel(string 10 num), password(string),
@@ -11,9 +11,9 @@ include ($_SERVER["DOCUMENT_ROOT"] . "/web2/controller/function.php");
 //TODO: ADD SERVER REQUEST METHOD
 $websiteFunctions = new WebsiteFunctions;
 $POSTArray = array($_POST["nom"], $_POST["prenom"], $_POST["birthdate"], $_POST["tel"], $_POST["password"], $_POST["email"]);
-if ($websiteFunctions -> testIssetEmpty($POSTArray) 
-	&& is_string($_POST["nom"]) 
-	&& is_string($_POST["prenom"]) 
+if ($websiteFunctions -> testIssetEmpty($POSTArray)
+	&& is_string($_POST["nom"])
+	&& is_string($_POST["prenom"])
 	&& is_string($_POST["tel"])
 	&& $websiteFunctions -> emailAlreadyExist($_POST["email"])) {
 	$nom = $_POST["nom"];
