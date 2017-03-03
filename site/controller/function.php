@@ -1,9 +1,10 @@
 <?php
 class WebsiteFunctions {
     private $dbPath;
-
+    private $conn;
     public function __construct() {
         $this -> dbPath = "../model/conn.php";
+        $conn = connectDB();
     }
 
     public function getdbPath(){

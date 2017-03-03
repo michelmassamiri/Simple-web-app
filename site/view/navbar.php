@@ -1,5 +1,5 @@
 <?php
-	$path = "/web2/";
+	$path = "/projet_techno/projet/site/";
 ?>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
