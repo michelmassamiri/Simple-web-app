@@ -4,7 +4,8 @@ class WebsiteFunctions {
     private $conn;
     public function __construct() {
         $this -> dbPath = "../model/conn.php";
-        $conn = connectDB();
+        require ($this -> dbPath);
+        $this->$conn = connectDB();
     }
 
     public function getdbPath(){
@@ -24,7 +25,6 @@ class WebsiteFunctions {
      *
      * */
     public function addUser($nom, $prenom, $birthdate, $tel, $email, $password) {
-        require ($this -> dbPath);
         $nom = $this->addDoubleQuote($nom);
         $prenom = $this->addDoubleQuote($prenom);
         $email = $this->addDoubleQuote($email);
@@ -34,51 +34,48 @@ class WebsiteFunctions {
         
         //$birthdate = date('m-d-Y', strtotime($birthdate));
         
-        $query = "INSERT INTO Users() values(" . $nom . "," . $prenom . "," . $tel . "," . $birthdate . "," . $email . "," . $password . ")";
+        $query = "INSERT INTO PrTec_Users() values(" . $nom . "," . $prenom . "," . $tel . "," . $birthdate . "," . $email . "," . $password . ")";
         try {
-            $conn -> query($query);
+            $this->$conn-> query($query);
         } catch (PDOException $err) {
             echo $err -> getMessage();
         }
-        $conn = NULL;
+        $this->$conn = NULL;
     }
     
     public function getUsers(){
-        require($this -> dbPath);
-        $query = "SELECT nom,prenom,email,tel,birthdate FROM Users";
+        $query = "SELECT nom,prenom,email,tel,birthdate FROM PrTec_Users";
         try {
-            $result = $conn -> query($query);
+            $result = $this->$conn -> query($query);
         } catch (PDOException $err) {
             echo $err -> getMessage();
         }
-        $conn = NULL;
+        $this->$conn = NULL;
         return $result;
     }
 
     public function getUser($email){
-        require($this -> dbPath);
-        $query = "SELECT nom,prenom,email,tel,birthdate FROM Users WHERE email=" . $this->addDoubleQuote($email);
+        $query = "SELECT nom,prenom,email,tel,birthdate FROM PrTec_Users WHERE email=" . $this->addDoubleQuote($email);
         try {
-            $result = $conn -> query($query);
+            $result = $this->$conn -> query($query);
         } catch (PDOException $err) {
             echo $err -> getMessage();
         }
-        $conn = NULL;
+        $this->$conn = NULL;
         return $result;
     }
 
     public function userLogin($email,$password){
-        require($this -> dbPath);
-        $query = "SELECT COUNT(*) FROM Users WHERE email=" . $this->addDoubleQuote($email) . " AND password=" . $this->addDoubleQuote($password);
+        $query = "SELECT COUNT(*) FROM PrTec_Users WHERE email=" . $this->addDoubleQuote($email) . " AND password=" . $this->addDoubleQuote($password);
         try{
-            $result = $conn -> query($query, PDO::FETCH_NUM);
+            $result = $this->$conn -> query($query, PDO::FETCH_NUM);
             if ($result -> rowCount() == 1)
                 return True;
             return False;
         }catch(PDOException $err){
             echo $err->getMessage();
         }
-        $conn = NULL;
+        $this->$conn = NULL;
         return False;
     }
     
@@ -103,9 +100,8 @@ class WebsiteFunctions {
      *
      * */
     public function usersView() {
-        require($this -> dbPath);
-        $query = "SELECT nom,prenom,email,tel,birthdate FROM Users";
-        $result = $conn -> query($query);
+        $query = "SELECT nom,prenom,email,tel,birthdate FROM PrTec_Users";
+        $result = $this->$conn -> query($query);
         echo "<table class='table'> <thead><tr>";
         echo "</tr></thead><tbody>";
         foreach ($result as $key => $value) {
@@ -125,11 +121,10 @@ class WebsiteFunctions {
      * @Outputs : boolean
      * */
     public function emailAlreadyExist($email) {
-        require ($this -> dbPath);
         $email = "\"" . $email . "\"";
-        $query = "SELECT COUNT(*) FROM Users WHERE email=" . $email;
+        $query = "SELECT COUNT(*) FROM PrTec_Users WHERE email=" . $email;
         try {
-            $result = $conn -> query($query, PDO::FETCH_NUM);
+            $result = $this->$conn -> query($query, PDO::FETCH_NUM);
             if ($result -> rowCount() == 1)
                 return True;
             return False;
@@ -167,20 +162,18 @@ class WebsiteFunctions {
   }
 
   public function addUUID($uuid,$email){
-    require($this -> dbPath);
     $query = "INSERT INTO UUID() values(" . $uuid .",". $this->addDoubleQuote($email).")";
     try{
-        $conn -> query($query);
+        $this->$conn -> query($query);
     }catch(PDOException $err){
         echo $err -> getMessage();
     }
 }
 
 public function checkUUIDExist($uuid){
-    require($this -> dbPath);
     $query = "SELECT COUNT(*) FROM UUID WHERE uuid=" . $uuid;
     try {
-        $result = $conn -> query($query, PDO::FETCH_NUM);
+        $result = $this->$conn -> query($query, PDO::FETCH_NUM);
         if ($result -> rowCount() == 1)
             return True;
         return False;
@@ -190,10 +183,9 @@ public function checkUUIDExist($uuid){
 }
 
 public function getUUIDByEmail($email){
-    require($this -> dbPath);
     $query = "SELECT uuid FROM UUID WHERE email=" . $this->addDoubleQuote($email);
     try {
-        $result = $conn -> query($query, PDO::FETCH_ASSOC);
+        $result = $this->$conn -> query($query, PDO::FETCH_ASSOC);
         return $result->fetch()['uuid'];
     }catch(PDOException $err){
         echo $err -> getMessage();
@@ -201,10 +193,9 @@ public function getUUIDByEmail($email){
 }
 
 public function getEmailByUUID($uuid){
-    require($this -> dbPath);
     $query = "SELECT email FROM UUID WHERE uuid=" .$uuid;
     try {
-        $result = $conn -> query($query, PDO::FETCH_ASSOC);
+        $result = $this->$conn -> query($query, PDO::FETCH_ASSOC);
         return $result->fetch()['email'];
     }catch(PDOException $err){  
         echo $err -> getMessage();

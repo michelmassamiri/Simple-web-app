@@ -3,11 +3,11 @@
 function connectDB ()
 {
     try {
-        $ini_array = parse_ini_file("config.ini");
-        $server = "localhost";
-        $user = "root";
-        $pass = $ini_array["pass"];
-        $conn = new PDO("mysql:host=localhost;dbname=WEB", $user, $pass);
+        $ini_array = parse_ini_file("../conf/app.ini");
+        $server = $ini_array["db_hostname"];
+        $user = $ini_array["db_user"];
+        $pass = $ini_array["db_password"];
+        $conn = new PDO("mysql:host=$server;dbname=$user", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $err) {
         echo "Connection to DB FAILED" . $err->getMessage();
