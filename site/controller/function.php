@@ -3,14 +3,11 @@ class WebsiteFunctions {
     private $dbPath;
     private $conn;
     public function __construct() {
-        $this -> dbPath = "../model/conn.php";
-        require ($this -> dbPath);
-        $this->$conn = connectDB();
+        $this->dbPath = "../model/conn.php";
+        require ($this->dbPath);
+        $this->conn = connectDB();
     }
 
-    public function getdbPath(){
-        return $this -> dbPath;
-    }
     /*@Description : Add doublequote to a string
     * @Input: string
     * @Output: string
@@ -36,46 +33,46 @@ class WebsiteFunctions {
         
         $query = "INSERT INTO PrTec_Users() values(" . $nom . "," . $prenom . "," . $tel . "," . $birthdate . "," . $email . "," . $password . ")";
         try {
-            $this->$conn-> query($query);
+            $this->conn-> query($query);
         } catch (PDOException $err) {
             echo $err -> getMessage();
         }
-        $this->$conn = NULL;
+        $this->conn = NULL;
     }
     
     public function getUsers(){
         $query = "SELECT nom,prenom,email,tel,birthdate FROM PrTec_Users";
         try {
-            $result = $this->$conn -> query($query);
+            $result = $this->conn -> query($query);
         } catch (PDOException $err) {
             echo $err -> getMessage();
         }
-        $this->$conn = NULL;
+        $this->conn = NULL;
         return $result;
     }
 
     public function getUser($email){
         $query = "SELECT nom,prenom,email,tel,birthdate FROM PrTec_Users WHERE email=" . $this->addDoubleQuote($email);
         try {
-            $result = $this->$conn -> query($query);
+            $result = $this->conn -> query($query);
         } catch (PDOException $err) {
             echo $err -> getMessage();
         }
-        $this->$conn = NULL;
+        $this->conn = NULL;
         return $result;
     }
 
     public function userLogin($email,$password){
         $query = "SELECT COUNT(*) FROM PrTec_Users WHERE email=" . $this->addDoubleQuote($email) . " AND password=" . $this->addDoubleQuote($password);
         try{
-            $result = $this->$conn -> query($query, PDO::FETCH_NUM);
+            $result = $this->conn -> query($query, PDO::FETCH_NUM);
             if ($result -> rowCount() == 1)
                 return True;
             return False;
         }catch(PDOException $err){
             echo $err->getMessage();
         }
-        $this->$conn = NULL;
+        $this->conn = NULL;
         return False;
     }
     
@@ -100,8 +97,9 @@ class WebsiteFunctions {
      *
      * */
     public function usersView() {
-        $query = "SELECT nom,prenom,email,tel,birthdate FROM PrTec_Users";
-        $result = $this->$conn -> query($query);
+        $query = "SELECT nom,prenom,email,tel,birthdate FROM
+    PrTec_Users";
+        $result = $this->conn -> query($query);
         echo "<table class='table'> <thead><tr>";
         echo "</tr></thead><tbody>";
         foreach ($result as $key => $value) {
@@ -124,7 +122,7 @@ class WebsiteFunctions {
         $email = "\"" . $email . "\"";
         $query = "SELECT COUNT(*) FROM PrTec_Users WHERE email=" . $email;
         try {
-            $result = $this->$conn -> query($query, PDO::FETCH_NUM);
+            $result = $this->conn -> query($query, PDO::FETCH_NUM);
             if ($result -> rowCount() == 1)
                 return True;
             return False;
@@ -145,12 +143,12 @@ class WebsiteFunctions {
         return True;
     }
     
-    /*@Description: Generate a random UUID(Universally Unique Identifier)
+    /*@Description: Generate a random PrTec_UUID(Universally Unique Identifier)
     * @Input: void
     * @Output: int(9)
     */ 
     public function randomUUID(){
-      srand($this -> make_seed());
+      srand($this- make_seed());
       $randomUUID = rand();
       $randomUUID = substr((string) $randomUUID,0,9);
       return $randomUUID;
@@ -162,18 +160,18 @@ class WebsiteFunctions {
   }
 
   public function addUUID($uuid,$email){
-    $query = "INSERT INTO UUID() values(" . $uuid .",". $this->addDoubleQuote($email).")";
+    $query = "INSERT INTO PrTec_UUID() values(" . $uuid .",". $this->addDoubleQuote($email).")";
     try{
-        $this->$conn -> query($query);
+        $this->conn -> query($query);
     }catch(PDOException $err){
         echo $err -> getMessage();
     }
 }
 
 public function checkUUIDExist($uuid){
-    $query = "SELECT COUNT(*) FROM UUID WHERE uuid=" . $uuid;
+    $query = "SELECT COUNT(*) FROM PrTec_UUID WHERE uuid=" . $uuid;
     try {
-        $result = $this->$conn -> query($query, PDO::FETCH_NUM);
+        $result = $this->conn -> query($query, PDO::FETCH_NUM);
         if ($result -> rowCount() == 1)
             return True;
         return False;
@@ -183,9 +181,9 @@ public function checkUUIDExist($uuid){
 }
 
 public function getUUIDByEmail($email){
-    $query = "SELECT uuid FROM UUID WHERE email=" . $this->addDoubleQuote($email);
+    $query = "SELECT uuid FROM PrTec_UUID WHERE email=" . $this->addDoubleQuote($email);
     try {
-        $result = $this->$conn -> query($query, PDO::FETCH_ASSOC);
+        $result = $this->conn -> query($query, PDO::FETCH_ASSOC);
         return $result->fetch()['uuid'];
     }catch(PDOException $err){
         echo $err -> getMessage();
@@ -193,13 +191,13 @@ public function getUUIDByEmail($email){
 }
 
 public function getEmailByUUID($uuid){
-    $query = "SELECT email FROM UUID WHERE uuid=" .$uuid;
+    $query = "SELECT email FROM PrTec_UUID WHERE uuid=" .$uuid;
     try {
-        $result = $this->$conn -> query($query, PDO::FETCH_ASSOC);
+        $result = $this->conn -> query($query, PDO::FETCH_ASSOC);
         return $result->fetch()['email'];
-    }catch(PDOException $err){  
+    }catch(PDOException $err){
         echo $err -> getMessage();
-    }    
+    }
 }
     //TODO : Faire une fonction de logging dans un fichier
     //TODO formatage des données
