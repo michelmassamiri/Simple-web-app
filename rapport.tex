@@ -42,7 +42,9 @@
 {
 	\LARGE{Université de Bordeaux} \\
 	\\
-    Enzo PERUZZETTO \\
+        Enzo PERUZZETTO \\
+        Michel Massamiri\\
+        Matthias Paulmier\\
 }
 
 \maketitle
@@ -102,7 +104,7 @@ Créer un outil pour les agents du service leur permettant de répertorier l’o
 \subsection{besoin fonctionnel}
 
 
-\subsubsection{ base de donnée }
+\subsubsection{base de donnée }
 
 Une base de donnée MySQL.
 \begin{itmesize}
@@ -110,10 +112,9 @@ Une base de donnée MySQL.
 \item Une table de services.
 \item Une table de questions.
 \item Une table de reponse.
-\item Une table de planning.
 \end{itemsize}
 
-\subsubsection{ Une page d'identification }
+\subsubsection{Une page d'identification }
 
 Cette page sera de la forme d'un formulaire, elle aura les fonctions suivantes:
 \begin{itemsize}
@@ -122,7 +123,7 @@ Cette page sera de la forme d'un formulaire, elle aura les fonctions suivantes:
 \item Une fonction qui vérifie si les champs sont bien remplis et bien écrit.
 \end{itemsize}
 
-\subsubsection{ FAQ }
+\subsubsection{FAQ }
 
 Se service permettra aux utilisateurs de poser et répondre à certaines questions.
 Elle aura donc les fonctions suivante:
@@ -132,16 +133,15 @@ Elle aura donc les fonctions suivante:
 \item Une fonction permettant de repondre à la question.
 \end{ itemsize}
 
-\subsubsection{ Petites annoce }
+\subsubsection{Listes des services disponnibles }
 
-Se service permettra d'afficher une liste de services, de besoins que l'utilisateur peut donner/recevoir.%comme le boncoin
+\subsubsection{Listes des utilisateurs}
 
+\subsubsection{Inscription}
 
+\subsubsection{Interface admin}
 
-
- %(organisation des pages PHP et SQL)
-
-
+%(organisation des pages PHP et SQL)
 %Décrire les pages accessibles, comment elles s’organisent (classes PHP ?), quelle est la bdd associée:
 %Publique Services disponibles
 %Admin Services disponibles
@@ -150,33 +150,60 @@ Se service permettra d'afficher une liste de services, de besoins que l'utilisat
 %Publique Propositions (modéré)
 %Admin Propositions
 %modularite cote admin
+\newpage
 %---------------------------------------------------------------------------------
-% 
+% Descriptif de la base de donnée
 %---------------------------------------------------------------------------------
-%\section{}
+\section{Descriptif de la base de donnée}
+
+
 
 %-------------------------------------------------------------------------------
-% 
+% Le service d'inscription et d'identification
 %-------------------------------------------------------------------------------
-
-%\section{}
-
-%-------------------------------------------------------------------------------
-% 
-%-------------------------------------------------------------------------------
-
-%\section{}
+\section{L'inscription et l'identification}
 
 %-------------------------------------------------------------------------------
-% 
+% Le service liste de services
 %-------------------------------------------------------------------------------
-
-%\section{}
+\section{Liste des services}
 
 %-------------------------------------------------------------------------------
-% 
+% Le service FAQ
 %-------------------------------------------------------------------------------
+\section{La FAQ}
 
-%\section{}
+Le service FAQ permet aux client de poser des questions et répondres aux questions déjà posées.
+Pour cela, le service est codé avec plusieurs fichiers qui soit:
+\begin{itemsize}
+\item Permet l'accés à la base de donnée et de récupéré les données nécéssaires à se service.
+\item Permet Le contrôle entre les données et la vue du client.
+\item Permet d'afficher la vue chez le client.
+\end{itemsize}
+
+\subsection{Les fichiers de modèles}
+
+\subsection{Les fichiers de Control}
+
+\subsection{Les fichiers de Vues}
+
+%-------------------------------------------------------------------------------
+% Interface admin
+%-------------------------------------------------------------------------------
+\section{L'interface Admin}
+
+
+%-------------------------------------------------------------------------------
+% La livraison
+%-------------------------------------------------------------------------------
+\section{Livraison du produit}
+
+\subsection{structure de l'archive de livraison}
+
+\subsection{L'installation}
+%-------------------------------------------------------------------------------
+% Conclusion
+%-------------------------------------------------------------------------------
+\section{Conclusion du projet}
 
 \end{document}
