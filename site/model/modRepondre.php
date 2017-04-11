@@ -2,7 +2,6 @@
 	include_once('conn.php');
 	include_once('classReponse.php');
 	
-	// session_start();
 	
 	$conn = connectDB();
 	
@@ -15,7 +14,7 @@
 	$new_id = $new_id + 1;
 	echo date("Y/m/d");
 	//$reponse = new reponse(nouveaux id, $id_question, auteur= login session, date("j/n/Y"), $texteReponse);
-	$new_reponse = new Reponse($new_id, $id_question, 'enzo'/*$_SESSION['login']*/, date("Y/m/d"), $texteReponse);
+	$new_reponse = new Reponse($new_id, $id_question, $auteur, date("Y/m/d"), $texteReponse);
 	
 	//ajoute $reponse a la bdd
 	$query = 'INSERT INTO PrTec_Reponse VALUES ('.$new_reponse->getReponseID().', '.$new_reponse->getQuestionId().', \''.$new_reponse->getAuteur().'\', \''.$new_reponse->getReponse().'\', \''.$new_reponse->getDate().'\')';

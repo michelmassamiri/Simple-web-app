@@ -3,11 +3,12 @@
 		<h1> Welcome to this test website </h1>
 		<?php
 		session_start();
-		if (!isset($_SESSION["nom"])) {
+		if (!isset($_SESSION["login"])) {
 			include_once("login.php");
 		}	
 		else{
-			echo "Welcome " . $_SESSION["nom"] ." ". $_SESSION["prenom"] . "!\n";
+            
+			echo "Welcome " . $_SESSION["login"] . "!\n";
 
 			if (session_status() != PHP_SESSION_NONE) {
 				echo "<form action=\"controller/login.php\" method=\"GET\">";

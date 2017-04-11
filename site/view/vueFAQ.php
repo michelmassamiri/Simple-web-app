@@ -20,7 +20,7 @@
 			<br /><button type="submit" class="btn btn-success btn-lg" >Posez votre question</button>
 			</form>
 			<br />
-			<?php		
+			<?php
 			foreach ($faq->getArrayQ() as $question){
 				if( isset($question)){
 					echo '<div class="panel panel-primary">';
