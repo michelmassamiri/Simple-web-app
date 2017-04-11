@@ -9,7 +9,7 @@ include ($_SERVER["DOCUMENT_ROOT"] . "/site/controller/function.php");
  * @Includes : function.php*/
 
 //TODO: ADD SERVER REQUEST METHOD
-$websiteFunctions = new WebsiteFunctions;
+$websiteFunctions = new WebsiteFunctions();
 $POSTArray = array($_POST["nom"], $_POST["prenom"], $_POST["birthdate"], $_POST["tel"], $_POST["password"], $_POST["email"]);
 if ($websiteFunctions -> testIssetEmpty($POSTArray)
 	&& is_string($_POST["nom"])
@@ -23,8 +23,8 @@ if ($websiteFunctions -> testIssetEmpty($POSTArray)
 	$password = $_POST["password"];
 	$email = $_POST["email"];
 	$uuid = $websiteFunctions -> randomUUID();
-	$websiteFunctions -> addUser($nom, $prenom, $birthdate, $tel, $email, md5($password));
-	$websiteFunctions -> addUUID($uuid,$email);
+	$websiteFunctions->addUser($nom, $prenom, $birthdate, $tel, $email, md5($password));
+	$websiteFunctions->addUUID($uuid,$email);
 	header("Location: confirm.php?uuid=" . $websiteFunctions -> randomUUID());
 	exit;
 }
