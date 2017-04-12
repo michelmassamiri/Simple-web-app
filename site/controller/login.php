@@ -1,20 +1,29 @@
 <?php
-if(isset($_GET["logout"]) && $_GET["logout"] == 1){
-    //deconnecte todo
-}
-else{
-    $login = $_POST["login"];
-    $password = $_POST["password"];
+include_once('../model/modLogin.php');
+session_start();
 
-    if(!isset($login) && !isset($password)){
-        if(check($login, $password)){//todo dans model qui verifie dans la bdd
-            $_SESSION["login"] = $login;
-            $_SESSION["password"] = $password;
-            $_SESSION["droit"] = getdroit($login);//todo dans model qui retourne le droit de l'auteur
-        }
+if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
+    session_regenerate_id();
+    $_SESSION['session_id'] = session_id();
+}
+if(!isset($_SESSION["login"])){
+    $auteur = "Anonyme";
+    $_SESSION['droits'] = 0;
+}
+$login = $_POST["login"];
+$password = $_POST["password"];
+
+if(isset($login) && isset($password)){
+    if(check($login, $password)){
+        $_SESSION["login"] = $login;
+        $_SESSION["password"] = $password;
+        $_SESSION["droit"] = getdroit($login, $password);
     }
+    header('location:../index.php');
+}else{
+    include_once('../index.php');
 }
 
-header("location:../view/welcome");
+
 
 ?>

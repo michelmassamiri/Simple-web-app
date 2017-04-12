@@ -9,11 +9,12 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div class="container">
-			<div class="jumbotron">
-				<?php
+      	<?php
                 include_once ("navbar.php");
 				?>
+		<div class="container">
+			<div class="jumbotron">
+			
 				<?php
                 include_once ("../controller/function.php");
                 $websiteFunctions = new WebsiteFunctions();
