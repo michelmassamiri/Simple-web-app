@@ -9,8 +9,18 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<?php include_once("navbar.php");
-		    ?>
+<?php
+include_once("navbar.php");
+session_start();
+if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
+    session_regenerate_id();
+    $_SESSION['session_id'] = session_id();
+}
+if(!isset($_SESSION["login"])){
+    $auteur = "Anonyme";
+    $_SESSION['droits'] = 0;
+}
+?>
 <div class="container">
 		<div class="jumbotron">
 			<h2>Bienvenue dans la Foire Aux Question</h2>
