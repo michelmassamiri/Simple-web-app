@@ -17,7 +17,7 @@
                         $categorie = $service['categorie'];
                         $lieu = $service['lieu'];
                         $date = date_create($service['date']);
-                        $date_formate = date_format($date, 'Y-m-d H:i:s');
+                        $date_formate = date_format($date, 'Y-m-d');
                         $contenu = $service['contenu'];
                         $auteur = $service['auteur'];
                         $html = '
@@ -33,7 +33,7 @@
                                      </div>
                                 </div>
                             </div>
-                         </div>   
+                         </div>
                         ';
 
                         echo $html;
