@@ -1,3 +1,6 @@
 <?php
-echo "Authentifie en tant qu'admin.\nCe repertoire servira pour l'installation du server";
+include_once("install.php");
+
+$i = createDatabase ("dbserver", "mmassamire", "bddpr_tec", "projettechno@1994");
+echo $i;
 ?>
