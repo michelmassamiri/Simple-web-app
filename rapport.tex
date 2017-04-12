@@ -1,25 +1,28 @@
-\documentclass[11pt]{report}
-\usepackage[a4paper]{geometry}
-\usepackage[myheadings]{fullpage}
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[frenchb]{babel}
+\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[font=small, labelfont=bf]{caption}
-\usepackage[protrusion=true, expansion=true]{microtype}
-\usepackage{sectsty}
-\usepackage{url, lipsum}
-\usepackage{mathptmx}
-\usepackage[utf8]{inputenc}
-\usepackage[francais]{babel}
-\pagestyle{plain}
+\usepackage{minted} %compiler avec la commande -shell-escape
+\usepackage{graphicx}
 
-\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
-\onehalfspacing
-\setcounter{tocdepth}{5}
-\setcounter{secnumdepth}{5}
+%% Todo List
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
 
-\renewcommand{\thesection}{\arabic{section}}
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\setlength{\parskip}{.5em}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 
 %-------------------------------------------------------------------------------
@@ -30,10 +33,9 @@
 
 \title
 {
-	\HRule{2pt} \\ [0.5cm]
+	\HRule \\ [0.5cm]
 	\LARGE \textbf{\uppercase{Projet technologique}}
-	\HRule{2pt} \\ [0.5cm]
-	\normalsize \today
+	\HRule \\ [0.5cm]
 }
 
 \date{}
@@ -47,7 +49,17 @@
         Matthias Paulmier\\
 }
 
+\begin{document}
+
+\null  % Empty line
+\nointerlineskip  % No skip for prev line
+\vfill
+\let\snewpage \newpage
+\let\newpage \relax
 \maketitle
+\let \newpage \snewpage
+\vfill
+\break % page break
 %-------------------------------------------------------------------------------
 % Table des matières
 %-------------------------------------------------------------------------------
@@ -58,8 +70,6 @@
 %-------------------------------------------------------------------------------
 % Présentation du projet - Introduction
 %-------------------------------------------------------------------------------
-
-\renewcommand{\thesection}{\arabic{section}}
 
 \section{Présentation du projet}
 	\emph{ Web et base de données : un outil pour les seniors et personnes handicapées}\\
@@ -182,10 +192,34 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 \end{itemsize}
 
 \subsection{Les fichiers de modèles}
+\subsubsection{classFaq.php}
+\begin{minted}{php}
 
+\end{minted}
+\subsubsection{classQuestion.php}
+\begin{minted}{php}
+
+\end{minted}
+\subsubsection{classReponse.php}
+\begin{minted}{php}
+
+\end{minted}
+\subsubsection{modFaq.php}
+\begin{minted}{php}
+
+\end{minted}
 \subsection{Les fichiers de Control}
 
+\subsubsection{FAQ.php}
+\begin{minted}{php}
+
+\end{minted}
 \subsection{Les fichiers de Vues}
+
+\subsubsection{vueFaq.php}
+\begin{minted}{php}
+
+\end{minted}
 
 %-------------------------------------------------------------------------------
 % Interface admin
