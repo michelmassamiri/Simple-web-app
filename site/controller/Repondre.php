@@ -5,7 +5,8 @@ if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
     $_SESSION['session_id'] = session_id();
 }
 if(!isset($_SESSION["login"])){
-    $auteur = "Anonyme";
+    $_SESSION['session_id'] = session_id();
+    $_SESSION['login'] = "Anonyme";
     $_SESSION['droits'] = 0;
 }
 

@@ -8,6 +8,9 @@ if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
     $_SESSION['session_id'] = session_id();
 }
 if (!isset($_SESSION["login"])) {
+    $_SESSION['session_id'] = session_id();
+    $_SESSION["login"] = "Anonyme";
+    $_SESSION["droit"] = 0;
     include_once("login.php");
 }	
 else{
