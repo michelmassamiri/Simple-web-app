@@ -7,10 +7,6 @@ if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
     session_regenerate_id();
     $_SESSION['session_id'] = session_id();
 }
-if(!isset($_SESSION["login"])){
-    $auteur = "Anonyme";
-    $_SESSION['droits'] = 0;
-}
 if (!isset($_SESSION["login"])) {
     include_once("login.php");
 }	
