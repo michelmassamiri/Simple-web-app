@@ -7,7 +7,7 @@
 			include_once("login.php");
 		}	
 		else{
-            
+            echo $_SESSION["droits"];
 			echo "Welcome " . $_SESSION["login"] . "!<br\>";
 
 		}

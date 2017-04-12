@@ -7,10 +7,10 @@
 			<input type="password" name="password" placeholder="Password" required class="form-control">
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-default"> Se connecter </button>
-		
-		</div>
-
-		
+			<button type="submit" class="btn btn-default" > Se connecter </button>
+            <a  href="view/users.php"><button type="button" class="btn btn-default">S'inscrire</button></a>
+		</div>	
 </form>
+
+     
 </div>

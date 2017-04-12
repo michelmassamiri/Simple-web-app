@@ -18,6 +18,7 @@ if(isset($login) && isset($password)){
         $_SESSION["login"] = $login;
         $_SESSION["password"] = $password;
         $_SESSION["droit"] = getdroit($login, $password);
+        
     }
     header('location:../index.php');
 }else{
