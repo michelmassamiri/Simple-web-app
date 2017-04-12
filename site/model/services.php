@@ -31,8 +31,7 @@ function add_service($categorie, $auteur, $adresse, $date, $lieu, $contenu){
   	'contenu' => $contenu
   	));
 
-  echo 'Le service a bien été ajouté !';
-
+  return ($req->rowCount() == 1) ? true : false ;
 }
 
 function update_service($data, $id) {
@@ -53,7 +52,7 @@ function update_service($data, $id) {
     }
 
     $vars_imploded = implode("," , $vars);
-    $sql = "UPDATE Services SET {$vars_imploded} WHERE id = {$id}";
+    $sql = "UPDATE PrTec_Services SET {$vars_imploded} WHERE id = {$id}";
 
     $req = $db->prepare($sql);
     $req->execute($sql_array);

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 //Call the model
 require('../model/services.php');
 

@@ -13,6 +13,7 @@
         <div class="container">
             <div class="jumbotron">
                 <?php
+
                     foreach ($services as $service){
                         $categorie = $service['categorie'];
                         $lieu = $service['lieu'];
@@ -20,6 +21,7 @@
                         $date_formate = date_format($date, 'Y-m-d');
                         $contenu = $service['contenu'];
                         $auteur = $service['auteur'];
+                        $id = $service['id'];
                         $html = '
                         <div class = container>
                             <div class="row">
@@ -37,6 +39,16 @@
                         ';
 
                         echo $html;
+
+                        if($_SESSION['droit']) {
+                            ?>
+                            <form date-toggle="date-validator" class="form-horizontal" action="../controller/ModifierService.php" method="POST">
+                                <input type="hidden" name="service_id" value= <?php $id ?>/>
+                                <button type="submit" class="btn btn-success">Modifier un service</button>
+                            </form>
+                            <?php
+
+                        }
                     }
                 ?>
             </div>

@@ -12,6 +12,7 @@ session_start();
     
 <?php if($_SESSION['droit'] == 1){ ?>
 			<li><a href="<?php echo $path; ?>view/listusers.php">Liste des utilisateurs</a></li>
+            <li><a href="<?php echo $path; ?>view/AjouterService.php">Ajouter un service</a></li>
 <?php } ?>
                  
             <li><a href="<?php echo $path; ?>controller/faq.php">FAQ</a></li>
