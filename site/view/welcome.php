@@ -12,7 +12,7 @@ if (!isset($_SESSION["login"])) {
 }	
 else{
     echo "Welcome " . $_SESSION["login"] . "!<br\>";
-    if($_SESSION['droits'] == 1){
+    if($_SESSION['droit'] == 1){
         echo '<p>Vous avez les droits administrateurs vous pouvez gérer, supprimer, ajouter des utilisateurs ,des services, des réponses et questions.<br/>Bonne session!</p>';
     }
     else{
