@@ -6,8 +6,9 @@ if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
     session_regenerate_id();
     $_SESSION['session_id'] = session_id();
 }
-if(!isset($_SESSION["login"])){
-    $auteur = "Anonyme";
+if(!isset($_SESSION["login"]) && !isset($_SESSION["password"])){
+    $_SESSION['session_id'] = session_id();
+    $_SESSION['login'] = "Anonyme";
     $_SESSION['droits'] = 0;
 }
 $login = $_POST["login"];

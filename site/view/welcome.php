@@ -7,7 +7,7 @@ if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
     session_regenerate_id();
     $_SESSION['session_id'] = session_id();
 }
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["login"]) && !isset($_SESSION["password"])) {
     $_SESSION['session_id'] = session_id();
     $_SESSION["login"] = "Anonyme";
     $_SESSION["droit"] = 0;
