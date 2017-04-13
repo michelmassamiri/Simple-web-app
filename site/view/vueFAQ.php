@@ -41,6 +41,8 @@ if(!isset($_SESSION["login"])){
 							echo '<h3>Reponse de '.$reponse->getAuteur().':</h3>';
 							echo '<p>'.$reponse->getReponse().'<br />';
 							echo 'repondu le '.$reponse->getdate().'</p>';
+                            if($_SESSION['droit'] == 1)
+                                echo '<a href="../controller/supprimerQR.php?id='.$reponse->getReponseID().'&value=1 ><button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';
 							
 						}
 					}
@@ -49,6 +51,8 @@ if(!isset($_SESSION["login"])){
 					echo '<br /><button type="submit" class="btn btn-primary">Repondre</button>';
 					echo '</form>';
 					echo '</div>';
+                    if($_SESSION['droit'] == 1)
+                        echo '<a href="../controller/supprimerQR.php?id='.$question->getID().'&value=0 ><button type="submit" class="btn btn-danger"> supprimer la question</button></a>';
 					echo'</div>';
 					echo '<br />';
 				}
