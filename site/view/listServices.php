@@ -42,10 +42,8 @@
 
                         if($_SESSION['droit']) {
                             ?>
-                            <form date-toggle="date-validator" class="form-horizontal" action="../controller/ModifierService.php" method="POST">
-                                <input type="hidden" name="service_id" value= <?php $id ?>/>
-                                <button type="submit" class="btn btn-success">Modifier un service</button>
-                            </form>
+                            <?php $link = "../controller/services.php?service_id=" . urlencode($id); ?>
+                            <a href="<?php echo htmlspecialchars($link); ?>" class="btn btn-info" role="button">Modifier un Service</a>
                             <?php
 
                         }

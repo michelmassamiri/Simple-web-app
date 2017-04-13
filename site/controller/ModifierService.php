@@ -1,13 +1,14 @@
 <?php
+session_start();
+//TODO : Securiser l'echange service id.
 
-//TODO : La mise joure du service ne marche pas encore a cause de la reccuperation de l'ID.
-
-if(isset($_POST["service_id"])) {
-    /* Get the Service Id */
-    $id = $_POST["service_id"];
+/* Call the view in order to do the modifications */
+if(empty($_POST)){
     require ('../view/update_service.php');
+}
 
-    echo $id;
+/* The view  have sent back the controller the user modifications */
+else {
     /* Build the data array for the model */
     $Post_array = array(
         'categorie' => $_POST["categorie"],
@@ -30,11 +31,13 @@ if(isset($_POST["service_id"])) {
 
     /* Call the model */
     require ('../model/services.php');
-    $result = update_service($data, $id);
+    $result = update_service($data, $_SESSION["service_id"]);
 
     if($result) {
         header("location:../controller/services.php");
     }
+
 }
+
 
 ?>
