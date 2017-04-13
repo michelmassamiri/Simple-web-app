@@ -23,7 +23,7 @@
 \setlength{\parskip}{.5em}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-
+\definecolor{lightgray}{gray}{.95}
 
 %-------------------------------------------------------------------------------
 % TITLE PAGE
@@ -193,32 +193,133 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 
 \subsection{Les fichiers de modèles}
 \subsubsection{classFaq.php}
-\begin{minted}{php}
+\begin{minted}{PHP}
+  <?php
+        include_once('classQuestion.php');
+	include_once('classReponse.php');
 
+	class FAQ{
+		private $question;
+		private $reponse;
+		
+		public function __construct(){
+			$this->question = array();//tableau de question
+			$this->reponse  = array();//tableau de réponse
+		}
+		
+		[...]
+        ?>
 \end{minted}
 \subsubsection{classQuestion.php}
 \begin{minted}{php}
+<?php 
+	class Question{
+		private $id_question;
+		private $auteur;
+		private $question;
+		private $date;
+		
+		public function __construct($id_question, $auteur, $question, $date){
+			$this->id_question = $id_question;
+			$this->auteur = $auteur;
+			$this->question = $question;
+			$this->date = $date;
+		}
 
+                [...]
+?>
 \end{minted}
 \subsubsection{classReponse.php}
 \begin{minted}{php}
-
+<?php
+	class Reponse{
+		private $id_reponse;
+		private $id_question;
+		private $auteur;
+		private $date;
+		private $reponse;
+		
+		public function __construct($id_reponse, $id_question, $auteur, $date, $reponse){
+			$this->id_reponse = $id_reponse;
+			$this->id_question = $id_question;
+			$this->auteur = $auteur;
+			$this->date = $date;
+			$this->reponse = $reponse;
+		}
+                 [...]
+?>
 \end{minted}
 \subsubsection{modFaq.php}
 \begin{minted}{php}
+<?php
+// Accès aux données
+include_once('classFaq.php');
+include_once('conn.php');
 
+$conn = connectDB();
+$faq = new FAQ();
+$arrayquestion = array();
+$arrayReponse = array();
+
+//question
+$query = "SELECT * FROM PrTec_Question";
+$stmt = $conn->query($query);
+while( $data = $stmt->fetch()){
+	$question = new Question($data['id_question'], $data['auteur'], $data['question'], $data['date']);
+	$faq->addQuestion($question);
+}
+
+
+//reponse
+$query = "SELECT * FROM PrTec_Reponse";
+$stmt = $conn->query($query);
+while( $data = $stmt->fetch()){
+	$reponse = new Reponse($data['id_reponse'], $data['id_question'], $data['auteur'], $data['date'], $data['reponse']);
+	$faq->addReponse($reponse);
+}
+
+
+
+?>
 \end{minted}
 \subsection{Les fichiers de Control}
 
 \subsubsection{FAQ.php}
-\begin{minted}{php}
 
-\end{minted}
+
 \subsection{Les fichiers de Vues}
 
 \subsubsection{vueFaq.php}
 \begin{minted}{php}
-
+  <?php
+  foreach ($faq->getArrayQ() as $question){
+    if( isset($question)){
+      echo '<div class="panel panel-primary">';
+      echo '<div class="panel-heading">Question de '.$question->getAuteur().': '.$question->getQuestion().' Poster le '.$question->getdate().'</p></div>';
+      echo '<div class="panel-body">';
+      foreach ($faq->getReponseQuestion($question) as $reponse){
+	if(isset($reponse)){
+	  echo '<h3>Reponse de '.$reponse->getAuteur().':</h3>';
+	  echo '<p>'.$reponse->getReponse().'<br />';
+	  echo 'repondu le '.$reponse->getdate().'</p>';
+          if($_SESSION['droit'] == 1)
+          echo '<a href="../controller/supprimerQRU.php?id='.$reponse->getReponseID().'&value=1" > <button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';
+	  
+	}
+      }
+      echo '<form method="POST" action="../controller/Repondre.php?id='.$question->getID().'">';
+      echo '<textarea name="description" placeholder="Poser vôtre reponse ici." rows="5" cols="100" required></textarea>';
+      echo '<br /><button type="submit" class="btn btn-primary">Repondre</button>';
+      echo '</form>';
+      echo '</div>';
+      if($_SESSION['droit'] == 1)
+      echo '<a href="../controller/supprimerQRU.php?id='.$question->getID().'&value=0 ><button type="submit" class="btn btn-danger"> supprimer la question</button></a>';
+      echo'</div>';
+      echo '<br />';
+    }
+    
+  } 
+  ?>
 \end{minted}
 
 %-------------------------------------------------------------------------------
