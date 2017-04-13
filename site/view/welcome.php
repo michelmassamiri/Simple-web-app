@@ -7,22 +7,23 @@ if( !isset($_SESSION['session_id']) || session_id() == $_SESSION['session_id']){
     session_regenerate_id();
     $_SESSION['session_id'] = session_id();
 }
-if (!isset($_SESSION["login"]) && !isset($_SESSION["password"])) {
+if (!isset($_SESSION["login"]) || $_SESSION['login'] == "Anonyme") {
     $_SESSION['session_id'] = session_id();
     $_SESSION["login"] = "Anonyme";
     $_SESSION["droit"] = 0;
     include_once("login.php");
 }	
 else{
-    echo "Welcome " . $_SESSION["login"] . "!<br\>";
-    if($_SESSION['droit'] == 1){
-        echo '<p>Vous avez les droits administrateurs vous pouvez gérer, supprimer, ajouter des utilisateurs ,des services, des réponses et questions.<br/>Bonne session!</p>';
-    }
-    else{
-        echo'<p>Bonjour chèr(e)s client(e)s vous avez la possibilité sur se site de poser des questions sur vos besoins mais aussi de répondre aux questions des autres personnes dans la section FAQ.</p>
+    if($_SESSION['login'] != "Anonyme"){
+        echo "Welcome " . $_SESSION["login"] . "!<br\>";
+        if($_SESSION['droit'] == 1){
+            echo '<p>Vous avez les droits administrateurs vous pouvez gérer, supprimer, ajouter des utilisateurs ,des services, des réponses et questions.<br/>Bonne session!</p>';
+        }
+        else{
+            echo'<p>Bonjour chèr(e)s client(e)s vous avez la possibilité sur se site de poser des questions sur vos besoins mais aussi de répondre aux questions des autres personnes dans la section FAQ.</p>
 <p>Vous pouvez aussi consulter les services disponibles dans la section \"les services\"</p>';
-    }  
-          
+        }
+    }
 }
 ?>
 	</div>

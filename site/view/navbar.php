@@ -18,7 +18,7 @@ session_start();
             <li><a href="<?php echo $path; ?>controller/faq.php">FAQ</a></li>
             <li><a href="<?php echo $path; ?>controller/services.php">Afficher les services</a></li>
     
-<?php if(isset($_SESSION["login"])){?>
+<?php if(isset($_SESSION["login"]) && $_SESSION['login'] != "Anonyme"){?>
             <li><a href="<?php echo $path; ?>controller/logout.php"> Se déconnecter</a></li>
 <?php }?>
                  
