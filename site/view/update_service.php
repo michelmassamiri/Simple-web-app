@@ -13,6 +13,7 @@
 
 <div class="jumbotron">
     <div class="container">
+        <p>Ajoutez vos modifications dans les champs que vous voulez modifier.</p>
         <form data-toggle="data-validator" class="form-horizontal" role="form" method="POST" action="../controller/ModifierService.php">
             <div class="form-group row">
                 <label for="example-text-input" class="col-2 col-form-label">Categorie</label>
@@ -27,7 +28,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="example-adresse-input" class="col-2 col-form-label">L'adresse</label>
+                <label for="example-adresse-input" class="col-2 col-form-label">L'adresse de l'auteur</label>
                 <div class="col-10">
                     <input class="form-control" type="text" name="adresse" id="example-email-input">
                 </div>
@@ -35,7 +36,7 @@
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Date</label>
                 <div class="col-10">
-                    <input class="form-control" type="date" name="date" id="example-date-input">
+                    <input class="form-control" type="date" name="date" id="example-date-input" placeholder="La date du service : Format : jj-mm-AAAA, Exemple : 05-08-2017">
                 </div>
             </div>
             <div class="form-group row">
