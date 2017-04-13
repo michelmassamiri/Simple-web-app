@@ -26,7 +26,7 @@ if(!isset($_SESSION["login"])){
 			<h2>Bienvenue dans la Foire Aux Question</h2>
 			<br />
 			<form method="POST" action="../controller/Demander.php">
-			<textarea name="description" rows="5" cols="100">Poser vôtre question ici.</textarea>
+			<textarea name="description" placeholder="Poser vôtre question ici." rows="5" cols="100" required></textarea>
 			<br /><button type="submit" class="btn btn-success btn-lg" >Posez votre question</button>
 			</form>
 			<br />
@@ -42,17 +42,17 @@ if(!isset($_SESSION["login"])){
 							echo '<p>'.$reponse->getReponse().'<br />';
 							echo 'repondu le '.$reponse->getdate().'</p>';
                             if($_SESSION['droit'] == 1)
-                                echo '<a href="../controller/supprimerQR.php?id='.$reponse->getReponseID().'&value=1 ><button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';
+                                echo '<a href="../controller/supprimerQRU.php?id='.$reponse->getReponseID().'&value=1" > <button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';
 							
 						}
 					}
 					echo '<form method="POST" action="../controller/Repondre.php?id='.$question->getID().'">';
-					echo '<textarea name="description" rows="5" cols="100">Poser vôtre reponse ici.</textarea>';
+					echo '<textarea name="description" placeholder="Poser vôtre reponse ici." rows="5" cols="100" required></textarea>';
 					echo '<br /><button type="submit" class="btn btn-primary">Repondre</button>';
 					echo '</form>';
 					echo '</div>';
                     if($_SESSION['droit'] == 1)
-                        echo '<a href="../controller/supprimerQR.php?id='.$question->getID().'&value=0 ><button type="submit" class="btn btn-danger"> supprimer la question</button></a>';
+                        echo '<a href="../controller/supprimerQRU.php?id='.$question->getID().'&value=0 ><button type="submit" class="btn btn-danger"> supprimer la question</button></a>';
 					echo'</div>';
 					echo '<br />';
 				}

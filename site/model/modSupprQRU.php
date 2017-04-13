@@ -21,4 +21,14 @@ function supprR($idreponse){
     $query = "DELETE FROM PrTec_Reponse WHERE id_reponse=".$idreponse;
     $stmt = $conn->query($query);
 }
+
+function supprU($email){
+    $conn = connectDB();
+    echo 'conn';
+    //suppr user
+    $query = "DELETE FROM PrTec_Users WHERE email=\"".$email."\"";
+    echo '<br/>'.$query;
+    $stmt = $conn->query($query);
+    echo 'fin';
+}
 ?>
