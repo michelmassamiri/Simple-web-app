@@ -17,31 +17,31 @@
             <div class="form-group row">
                 <label for="example-text-input" class="col-2 col-form-label">Categorie</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" name="categorie" id="example-text-input">
+                    <input class="form-control" type="text" name="categorie" id="example-text-input" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="example-auteur-input" class="col-2 col-form-label">Auteur</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" name="auteur" id="example-search-input">
+                    <input class="form-control" type="text" name="auteur" id="example-search-input" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="example-adresse-input" class="col-2 col-form-label">L'adresse</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" name="adresse" id="example-email-input">
+                    <input class="form-control" type="text" name="adresse" id="example-email-input" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Date</label>
                 <div class="col-10">
-                    <input class="form-control" type="date" name="date" id="example-date-input">
+                    <input class="form-control" type="date" name="date" id="example-date-input" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="example-lieu-input" class="col-2 col-form-label">Lieu du service</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" name="lieu" id="example-url-input">
+                    <input class="form-control" type="text" name="lieu" id="example-url-input" required>
                 </div>
             </div>
             <div class="form-group row">

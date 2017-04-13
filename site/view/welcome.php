@@ -15,7 +15,7 @@ if (!isset($_SESSION["login"]) || $_SESSION['login'] == "Anonyme") {
 }	
 else{
     if($_SESSION['login'] != "Anonyme"){
-        echo "Welcome " . $_SESSION["login"] . "!<br\>";
+        echo "<p>Welcome " . $_SESSION["login"] . "!</p>";
         if($_SESSION['droit'] == 1){
             echo '<p>Vous avez les droits administrateurs vous pouvez gérer, supprimer, ajouter des utilisateurs ,des services, des réponses et questions.<br/>Bonne session!</p>';
         }
