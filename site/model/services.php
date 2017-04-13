@@ -60,4 +60,17 @@ function update_service($data, $id) {
     return ($req->rowCount() == 1) ? true : false ;
 }
 
+function delete_service($id) {
+    require ('conn.php');
+
+    $db = connectDB();
+    //$sql = "DELETE FROM PrTec_Services WHERE id = {$id}";
+
+    $req = $db->prepare("DELETE FROM PrTec_Services WHERE id=:id");
+    $req->bindValue(':id',$id);
+
+    $req->execute();
+    return ($req->rowCount() == 1) ? true : false ;
+}
+
 ?>

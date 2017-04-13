@@ -1,6 +1,5 @@
 <?php
 
-//TODO : Afficher un erreur en cas de manque d'information.
 //TODO : Verifier l'histoire de time.
 
 /* Build the data array for the model */
@@ -13,7 +12,8 @@ $Post_array = array(
     'contenu' => $_POST["contenu"]
 );
 
-$mysqltime = date ("Y-m-d H:i:s", $Post_array['date']);
+$phptime = strtotime($_POST['date']);
+$mysqltime = date ("Y-m-d H:i:s", $phptime);
 
 /* Call the model */
 require ('../model/services.php');

@@ -9,12 +9,17 @@ if(empty($_POST)){
 
 /* The view  have sent back the controller the user modifications */
 else {
+    if(isset($_POST["date"])) {
+        $phptime = strtotime($_POST['date']);
+        $mysqltime = date ("Y-m-d H:i:s", $phptime);
+    }
+
     /* Build the data array for the model */
     $Post_array = array(
         'categorie' => $_POST["categorie"],
         'auteur' => $_POST["auteur"],
         'adresse' => $_POST["adresse"],
-        'date' => $_POST["date"],
+        'date' => $mysqltime,
         'lieu' => $_POST["lieu"],
         'contenu' => $_POST["contenu"]
     );
