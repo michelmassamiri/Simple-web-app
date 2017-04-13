@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<title>Users Database</title>
 	<meta charset="utf-8">

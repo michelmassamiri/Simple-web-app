@@ -21,8 +21,9 @@ if(!isset($_SESSION["login"])){
     $_SESSION['droits'] = 0;
 }
 ?>
-<div class="container">
-		<div class="jumbotron">
+
+<div class="jumbotron">
+    <div class="container">
 			<h2>Bienvenue dans la Foire Aux Question</h2>
 			<br />
 			<form method="POST" action="../controller/Demander.php">
