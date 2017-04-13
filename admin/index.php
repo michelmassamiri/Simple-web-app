@@ -28,7 +28,7 @@
 	<h1>Installation du projet</h1>
         <h2>Bienvenue dans le script d'installation de votre projet</h2><br><br>
         <div class="container">
-            <form date-toggle="date-validator" class="form-horizontal" action="install.php" method="POST">
+            <form date-toggle="date-validator" class="form-horizontal" action="controller.php" method="POST">
 		<div class="form-group">
                     <h3>Installation de la base de données</h3>
                     <p>
