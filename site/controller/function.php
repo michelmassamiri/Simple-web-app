@@ -109,6 +109,7 @@ class WebsiteFunctions {
             echo "<td>" . $value["email"] . "</td>";
             echo "<td>" . $value["tel"] . "</td>";
             echo "<td>" . $value["birthdate"] . "</td>";
+            echo '<td> <a href="../controller/supprimerQRU.php?email='.$value['email'].'&value=2" ><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></a> </td>';
             echo "</tr>";
         }
         echo "</tbody></table>";
