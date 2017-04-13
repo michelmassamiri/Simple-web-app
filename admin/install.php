@@ -34,40 +34,41 @@ class AdminFunctionnalities {
         $this->pass = $password;
 
         $sql = file_get_contents ("sql/install.sql");
-        $ret = 0;
-        try {
-            $conn = $this->connectDB();
-            $conn->exec("CREATE DATABASE `$name`;\n" . $sql) or die(print($conn->errorInfo()));
-        }
-        catch (PDOException $err) {
-            echo "La création de la base de données a échouée " . $err->getMessage();
+	print("CREATE DATABASE `$name`;\n" . $sql);
+            $ret = 0;
+            /*try {
+               $conn = $this->connectDB();
+               $conn->exec("CREATE DATABASE `$name`;\n" . $sql) or die(print($conn->errorInfo()));
+               }
+               catch (PDOException $err) {
+               echo "La création de la base de données a échouée " . $err->getMessage();
+               return $ret;
+               }*/
+            /* Comme la base n'était pas créée on donne le nom après */
+            $this->dbname = $name;
+            /* On ferme la connexion */
+            $conn = null;
             return $ret;
-        }
-        /* Comme la base n'était pas créée on donne le nom après */
-        $this->dbname = $name;
-        /* On ferme la connexion */
-        $conn = null;
-        return $ret;
-    }
-    /* @Description : Creates database
-     * @Input : DB server, DB name, DB user, DB password
-     * @Output : Error/Success code
-     */
-    function createSuperUser($server, $name, $user, $password)
-    {
-        $sql = file_get_contents ("sql/install.sql");
-        $ret = 0;
-        try {
-            $conn = new PDO("mysql:host=$server", $user, $password);
-            $conn->exec("CREATE DATABASE `$name`;\n" . $sql) or die(print_r($conn->errorInfo(), true));
-        }
-        catch (PDOException $err) {
-            echo "La création a échouée " . $err->getMessage();
-            return $ret;
-        }
-        /* On ferme la connexion */
-        $conn = null;
-        return $ret;
-    }
-}
+	}
+	    /* @Description : Creates database
+	     * @Input : DB server, DB name, DB user, DB password
+	     * @Output : Error/Success code
+	     */
+	    function createSuperUser($server, $name, $user, $password)
+	    {
+		$sql = file_get_contents ("sql/install.sql");
+		$ret = 0;
+		try {
+		    $conn = new PDO("mysql:host=$server", $user, $password);
+		    $conn->exec("CREATE DATABASE `$name`;\n" . $sql) or die(print_r($conn->errorInfo(), true));
+		}
+		catch (PDOException $err) {
+		    echo "La création a échouée " . $err->getMessage();
+		    return $ret;
+		}
+		/* On ferme la connexion */
+		$conn = null;
+		return $ret;
+	    }
+	}
 ?>

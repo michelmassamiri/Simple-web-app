@@ -41,7 +41,9 @@
                         Ce script installe une base de données sur votre serveur. Cette base de données est nécessaire pour le bon fonctionnement du site.<br>
                         Cette base de données nécessite les informations suivantes : 
                     </p>
-		    <label class="control-label"> Veuillez saisir le nom de la base de données : </label>
+		    <label class="control-label"> Veuillez saisir le server sur lequel se trouve la base de données : </label>
+		    <input type="text" name="dbserv" placeholder="Server de base de données" required class="form-control"><br>
+		    <label class="control-label"> Veuillez saisir le nom de la base de données à créer : </label>
 		    <input type="text" name="dbname" placeholder="Nom de la base de données" required class="form-control"><br>
                     <p>
                         Les identifiants de la base de données sont nécessaires pour installer celle-ci.
