@@ -11,8 +11,8 @@
 <body>
 <?php include_once ("navbar.php"); ?>
 
-<div class="container">
-    <div class="jumbotron">
+<div class="jumbotron">
+    <div class="container">
         <form data-toggle="data-validator" class="form-horizontal" role="form" method="POST" action="../controller/ModifierService.php">
             <div class="form-group row">
                 <label for="example-text-input" class="col-2 col-form-label">Categorie</label>
