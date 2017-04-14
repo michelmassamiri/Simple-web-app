@@ -4,7 +4,7 @@ session_start();
 
 /* Call the view in order to do the modifications */
 if(empty($_POST)){
-    require ('../view/update_service.php');
+    require('../view/ModifierService.php');
 }
 
 /* The view  have sent back the controller the user modifications */
