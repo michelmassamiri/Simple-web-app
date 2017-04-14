@@ -60,7 +60,7 @@ class AdminFunctionnalities {
 		$ret = 0;
 		try {
             $conn = $this->connectDB();
-            $conn->exec("INSERT INTO `mmassamire`.`PrTec_Users` (
+            $conn->exec("INSERT INTO `PrTec_Users` (
 `login` ,
 `nom` ,
 `prenom` ,
