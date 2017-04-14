@@ -76,7 +76,7 @@
 
 Les collectivités locales, les mairies par exemple, communiquent largement via Internet. Cependant des publics comme les séniors ou les personnes handicapées n'ont pas un accès simple aux informations spécifiques qui les intéressent sur les sites de ces collectivités et il est souhaitable d'enrichir les services qui leur sont proposés sur le web.\\
 
-L'objectif du projet est donc de créer une base d’informations accessible et intuitive permettant aux personnes les moins à l’aise avec l’outil informatique de s'informer et de trouver une réponse à leurs questions. Voici des exemples de fonctionnalités : accès à l’ensemble des services pour les séniors et les personnes handicapées (aides à domicile, soins infirmiers, loisirs,. . . ), visualisation des services disponibles en les géolocalisant, accès à un espace où les personnes âgées ou leurs familles pourraient poser leurs questions, collecte et partage des propositions de bénévoles (petits travaux, aide aux transports, etc). En pratique, le projet consiste à développer un prototype livrable de site Internet accompagné de sa base de données.
+L'objectif du projet est donc de créer une base d’informations accessible et intuitive permettant aux personnes les moins à l’aise avec l’outil informatique de s'informer et de trouver une réponse à leurs questions. Voici des exemples de fonctionnalités : accès à l’ensemble des services pour les séniors et les personnes handicapées (aides à domicile, soins infirmiers, loisirs,. . . ), visualisation des services disponibles, accès à un espace où les personnes âgées ou leurs familles pourraient poser leurs questions, collecte et partage des propositions de bénévoles (petits travaux, aide aux transports, etc). En pratique, le projet consiste à développer un prototype livrable de site Internet accompagné de sa base de données.
 
 \newpage
 %---------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ Mise en ligne d’une base d'informations recensant l’ensemble des services po
 \end{itemize}
 
 
-Reliée au site internet de la ville, cette base de données permettrait de visualiser les services disponibles en les géolocalisants.\\
+Reliée au site internet de la ville, cette base de données permettrait de visualiser les services disponibles.\\
 
 Créer un espace où les personnes âgées ou leurs familles pourraient poser leurs questions.
 Créer un espace pour rassembler les propositions des habitants de la commune qui souhaiteraient s’investir dans le bénévolat et notamment aider les plus âgées via des visites de courtoisie, de l’aide aux petits travaux, de l’aides aux transports, etc.
@@ -136,7 +136,7 @@ Cette page sera de la forme d'un formulaire, elle aura les fonctions suivantes:
 \subsubsection{FAQ }
 
 Se service permettra aux utilisateurs de poser et répondre à certaines questions.
-Elle aura donc les fonctions suivante:
+Elle aura donc les fonctions suivantes:
 \begin{ itemsize }
 \item Une fonction permettant de poser une question dans le FAQ.
 \item Une fonction permettant de valider la question poser.
@@ -144,13 +144,25 @@ Elle aura donc les fonctions suivante:
 \end{ itemsize}
 
 \subsubsection{Listes des services disponnibles }
+Le site web permet d'afficher à tous les utilisateurs de site les services qui sont disponibles dans la base de données.
+Ceci dit que le visiteur du site pourrait regarder tous les services mises par l'administrateur du site.
 
+Les informations que les services vont fournir sont les suivants :
+\begin{ itemsize }
+	\item Le type de service. Exemple : Aide à domicile, Faire les courses, loisir, etc...
+	\item Le lieu de l'événement.
+	\item La date du service.
+	\item Une description courte qui explique le service.
+	\item L'auteur de l'annonce (l'organisateur du service).
+\end{ itemsize }
 \subsubsection{Listes des utilisateurs}
 
 \subsubsection{Inscription}
 
 \subsubsection{Interface admin}
 
+Cet outil permettra aux administrateurs du site de gérer la suppression, la modification des services, des questions et des réponses, aussi des utilisateurs.
+Également, l’administrateur pourrait ajouter des services sur le site.
 %(organisation des pages PHP et SQL)
 %Décrire les pages accessibles, comment elles s’organisent (classes PHP ?), quelle est la bdd associée:
 %Publique Services disponibles
@@ -178,6 +190,24 @@ Elle aura donc les fonctions suivante:
 %-------------------------------------------------------------------------------
 \section{Liste des services}
 
+Cette fonctionnalité a été réalisé par les ‘controller/services.php’, ‘model/services’ et ‘view/listServices.php’.
+
+Le ‘controller/services.php’ est le fichier principal qui contrôle l’échange entre le ‘model’ et la ‘view’. Donc, si l’utilisateur veut regarder la liste des services, il appelle le ‘controller/services.php’, ce dernier appellera le ‘model/services.php’. Ensuite, le ‘model’ contient toutes les fonctions qui seront utiles pour afficher, insérer, modifier ou bien supprimer un service.
+
+Le bout de code PHP du ‘controller’est le suivant :
+\begin{minted}{php}
+	/* Call the model */
+ 	require('../model/services.php');
+
+	/* Get the services from the data base via the model */
+	$services = get_services();
+
+	/* Show the services via the view */
+	require('../view/listServices.php');
+\end{minted}
+
+Donc, après avoir appelé le ‘model’, on obtient la liste des service depuis la base de données dans un tableau qu’on l’affiche élément par élément en appelant le ‘view/listeService.php’.
+
 %-------------------------------------------------------------------------------
 % Le service FAQ
 %-------------------------------------------------------------------------------
@@ -201,24 +231,24 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 	class FAQ{
 		private $question;
 		private $reponse;
-		
+
 		public function __construct(){
 			$this->question = array();//tableau de question
 			$this->reponse  = array();//tableau de réponse
 		}
-		
+
 		[...]
         ?>
 \end{minted}
 \subsubsection{classQuestion.php}
 \begin{minted}{php}
-<?php 
+<?php
 	class Question{
 		private $id_question;
 		private $auteur;
 		private $question;
 		private $date;
-		
+
 		public function __construct($id_question, $auteur, $question, $date){
 			$this->id_question = $id_question;
 			$this->auteur = $auteur;
@@ -238,7 +268,7 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 		private $auteur;
 		private $date;
 		private $reponse;
-		
+
 		public function __construct($id_reponse, $id_question, $auteur, $date, $reponse){
 			$this->id_reponse = $id_reponse;
 			$this->id_question = $id_question;
@@ -304,7 +334,7 @@ while( $data = $stmt->fetch()){
 	  echo 'repondu le '.$reponse->getdate().'</p>';
           if($_SESSION['droit'] == 1)
           echo '<a href="../controller/supprimerQRU.php?id='.$reponse->getReponseID().'&value=1" > <button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';
-	  
+
 	}
       }
       echo '<form method="POST" action="../controller/Repondre.php?id='.$question->getID().'">';
@@ -317,8 +347,8 @@ while( $data = $stmt->fetch()){
       echo'</div>';
       echo '<br />';
     }
-    
-  } 
+
+  }
   ?>
 \end{minted}
 
