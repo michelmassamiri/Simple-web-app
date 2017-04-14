@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "My Protected Area"
-AuthUserFile /autofs/netapp/www/mpaulmier/projettechnotmpp/admin/.htpasswd
-Require valid-user

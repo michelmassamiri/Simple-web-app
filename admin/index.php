@@ -62,13 +62,7 @@
 		    <label class="control-label"> Veuillez saisir le mot de passe du super utilisateur : </label>
 		    <input type="password" name="supass1" placeholder="Mot de passe" required class="form-control"><br>
 		    <input type="password" name="supass2" placeholder="Saisir à nouveau" required class="form-control"><br>
-                    <h3>Localisation</h3>
-                    <p>
-                        Vous allez maintenant pouvoir choisir ou installer votre site.
-                    </p>
-		    <label class="control-label"> Veuillez saisir le chemin du répertoire d'intallation (chemin actuel par défaut) : </label>
-		    <input type="text" name="location" value="<?php echo exec(pwd); ?>" required class="form-control"><br>
-		</div>
+                </div>
 		<div class="form-group">
 		    <button type="submit" class="btn btn-default">Installation</button>
                 </div>

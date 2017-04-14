@@ -23,7 +23,6 @@
 \setlength{\parskip}{.5em}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-\definecolor{lightgray}{gray}{.95}
 
 %-------------------------------------------------------------------------------
 % TITLE PAGE
@@ -44,7 +43,7 @@
 {
 	\LARGE{Université de Bordeaux} \\
 	\\
-        Enzo PERUZZETTO \\
+        Enzo Peruzzetto \\
         Michel MASSAMIRI\\
         Matthias PAULMIER\\
 }
@@ -86,7 +85,7 @@ L'objectif du projet est donc de créer une base d’informations accessible et 
 
 \subsection{Présentation de l'entreprise}
 
-La mairie de Bègles aimerait mettre en place sur leur site internet une application web permettant aux personnes agées et handicapés de pouvoir obtenir des informations sur certains services et (questionnement?).
+La mairie de Bègles aimerait mettre en place sur leur site internet une application web permettant aux personnes agées et handicapés de pouvoir obtenir des informations sur certains services.
 
 \subsection{besoins de la mairie}
 
@@ -106,7 +105,7 @@ Créer un espace pour rassembler les propositions des habitants de la commune qu
 
 \subsection{objectifs}
 
-Pour répondre à ses besoins, nous avons pensé aux services suivants:
+Pour répondre à ses besoins, nous avons pensés aux services suivants:
 
 Créer une base d’informations accessible et intuitive permettant aux personnes les moins à l’aise avec l’outil informatique de trouver une réponse à leurs questions.
 Créer un outil pour les agents du service leur permettant de répertorier l’offre à destination de ce public et de suivre son évolution dans la commune.\\
@@ -116,7 +115,7 @@ Créer un outil pour les agents du service leur permettant de répertorier l’o
 
 \subsubsection{base de donnée }
 
-Une base de donnée MySQL.
+Une base de donnée MySQL sera délivré avec le site pour toute la partie de stockage de données. Elle est composée de table MySQL décrit ci-dessous:
 \begin{itmesize}
 \item Une table de users.
 \item Une table de services.
@@ -159,6 +158,8 @@ Les informations que les services vont fournir sont les suivants :
 
 \subsubsection{Inscription}
 
+L'inscription se fera sur un formulaire qui regarde au préalable si le client n'est pas déjà inscrit.
+
 \subsubsection{Interface admin}
 
 Cet outil permettra aux administrateurs du site de gérer la suppression, la modification des services, des questions et des réponses, aussi des utilisateurs.
@@ -178,7 +179,13 @@ Cet outil permettra aux administrateurs du site de gérer la suppression, la mod
 %---------------------------------------------------------------------------------
 \section{Descriptif de la base de donnée}
 
+\begin{figure}[!hp]
+\center
+\includegraphics[width= 15cm]{bdd.png}
+\caption{Base de donnée du site}
+\end{figure}
 
+Pour le service FAQ, les tables de la base relié a se service sont les tables PrTec\_Question et PrTec\_Reponse. Comme on peut le voir sur l'image ci-dessus la table question et réponse sont liées, le id\_question de la table réponse corresponds à l'identifiant d'une question stockée dans la table question.
 
 %-------------------------------------------------------------------------------
 % Le service d'inscription et d'identification
@@ -223,6 +230,7 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 
 \subsection{Les fichiers de modèles}
 \subsubsection{classFaq.php}
+Cette class permet de créer l'objet FAQ qui regroupe toutes les questions et réponses stocké dans la base de donnée.
 \begin{minted}{PHP}
   <?php
         include_once('classQuestion.php');
@@ -241,6 +249,7 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
         ?>
 \end{minted}
 \subsubsection{classQuestion.php}
+Cette class permet de créer l'objet Question qui est liée à la table PrTec\_Question, elle crée des champs de l'objet adéquacte au champs de la table question.
 \begin{minted}{php}
 <?php
 	class Question{
@@ -260,6 +269,7 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 ?>
 \end{minted}
 \subsubsection{classReponse.php}
+Cette class permet de créer l'objet Reponse qui est liée à la table PrTec\_Reponse, elle crée des champs de l'objet adéquacte au champs de la table reponse.
 \begin{minted}{php}
 <?php
 	class Reponse{
@@ -280,6 +290,7 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 ?>
 \end{minted}
 \subsubsection{modFaq.php}
+Ce fichier permet de créer l'objet faq avec tous les questions et réponse stockés et envoie l'objet FAQ aux controller faq.
 \begin{minted}{php}
 <?php
 // Accès aux données
@@ -315,13 +326,16 @@ while( $data = $stmt->fetch()){
 \subsection{Les fichiers de Control}
 
 \subsubsection{FAQ.php}
-
+Le fichier faq.php est le controleur de se service, il permet de récupérer les questions réponses donnés par le modèle et les envoie à la vue pour les affichers.
 
 \subsection{Les fichiers de Vues}
 
 \subsubsection{vueFaq.php}
+Ce fichier est la vue de la faq, elle affiche les questions et les réponses de chaques questions dans des panels boostrap.
+Elle a des bouttons permettant de poser une question ou de répondre.
+
 \begin{minted}{php}
-  <?php
+<?php
   foreach ($faq->getArrayQ() as $question){
     if( isset($question)){
       echo '<div class="panel panel-primary">';
@@ -333,8 +347,13 @@ while( $data = $stmt->fetch()){
 	  echo '<p>'.$reponse->getReponse().'<br />';
 	  echo 'repondu le '.$reponse->getdate().'</p>';
           if($_SESSION['droit'] == 1)
+<<<<<<< HEAD
           echo '<a href="../controller/supprimerQRU.php?id='.$reponse->getReponseID().'&value=1" > <button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';
 
+=======
+          echo '<a href="../controller/supprimerQRU.php?id='.$reponse->getReponseID().'&value=1" > <button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';//boutton repondre
+	  
+>>>>>>> a9960b3add41e550c73f963c1eadf8fe7c0bc2bd
 	}
       }
       echo '<form method="POST" action="../controller/Repondre.php?id='.$question->getID().'">';
@@ -342,14 +361,20 @@ while( $data = $stmt->fetch()){
       echo '<br /><button type="submit" class="btn btn-primary">Repondre</button>';
       echo '</form>';
       echo '</div>';
-      if($_SESSION['droit'] == 1)
-      echo '<a href="../controller/supprimerQRU.php?id='.$question->getID().'&value=0 ><button type="submit" class="btn btn-danger"> supprimer la question</button></a>';
+      if($_SESSION['droit'] == 1) //admin
+      echo '<a href="../controller/supprimerQRU.php?id='.$question->getID().'&value=0 ><button type="submit" class="btn btn-danger"> supprimer la question</button></a>';// boutton question
       echo'</div>';
       echo '<br />';
     }
+<<<<<<< HEAD
 
   }
   ?>
+=======
+    
+  } 
+?>
+>>>>>>> a9960b3add41e550c73f963c1eadf8fe7c0bc2bd
 \end{minted}
 
 %-------------------------------------------------------------------------------
