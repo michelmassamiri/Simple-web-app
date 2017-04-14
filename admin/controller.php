@@ -14,8 +14,10 @@ if (isset($_POST['project_name']) && isset($_POST['dbserv']) && isset($_POST['db
     include_once('install.php');
     
     $funs = new AdminFunctionnalities();
+    echo 't1';
     $success = $funs->createDatabase($dbserv,$dbname,$dbuser,$dbpass);
-    $success = $funs->createSuperUser($suname, $supass); 
+    $success = $funs->createSuperUser($suname, $supass);
+    echo 't2';
     /* Decompress site */
     $tar = new PharData('../site.tar.gz');
     /* creates site.tar */
@@ -42,5 +44,5 @@ if (isset($_POST['project_name']) && isset($_POST['dbserv']) && isset($_POST['db
     if($success == 1)
         header("location:../site/index.php");
     else
-        echo 'Erreur lors de l\'extraction et la creation du site'
+        echo 'Erreur lors de l\'extraction et la creation du site';
 }

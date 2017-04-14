@@ -72,7 +72,7 @@ class AdminFunctionnalities {
 )
 VALUES (
 '$name', NULL , NULL , '', '', NULL , '$pass', '1'
-);"
+);");
 		}
 		catch (PDOException $err) {
 		    echo "La création du super utilisateur a échouée " . $err->getMessage();

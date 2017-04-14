@@ -62,10 +62,6 @@
 		    <label class="control-label"> Veuillez saisir le mot de passe du super utilisateur : </label>
 		    <input type="password" name="supass1" placeholder="Mot de passe" required class="form-control"><br>
 		    <input type="password" name="supass2" placeholder="Saisir à nouveau" required class="form-control"><br>
-                    <h3>Localisation</h3>
-                    <p>
-                        Vous allez maintenant pouvoir choisir ou installer votre site.
-                    </p>
                 </div>
 		<div class="form-group">
 		    <button type="submit" class="btn btn-default">Installation</button>
