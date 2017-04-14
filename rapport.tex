@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{minted} %compiler avec la commande -shell-escape
 \usepackage{graphicx}
+\usepackage{dirtree}
 
 %% Todo List
 \usepackage{enumitem,amssymb}
@@ -146,6 +147,8 @@ Elle aura donc les fonctions suivantes:
 Le site web permet d'afficher à tous les utilisateurs de site les services qui sont disponibles dans la base de données.
 Ceci dit que le visiteur du site pourrait regarder tous les services mises par l'administrateur du site.
 
+<<<<<<< HEAD
+=======
 Les informations que les services vont fournir sont les suivants :
 \begin{ itemsize }
 	\item Le type de service. Exemple : Aide à domicile, Faire les courses, loisir, etc...
@@ -156,6 +159,7 @@ Les informations que les services vont fournir sont les suivants :
 \end{ itemsize }
 \subsubsection{Listes des utilisateurs}
 
+>>>>>>> 4411fe64709b31e569b74cd1d37789b2e5a07d01
 \subsubsection{Inscription}
 
 L'inscription se fera sur un formulaire qui regarde au préalable si le client n'est pas déjà inscrit.
@@ -190,8 +194,28 @@ Pour le service FAQ, les tables de la base relié a se service sont les tables P
 %-------------------------------------------------------------------------------
 % Le service d'inscription et d'identification
 %-------------------------------------------------------------------------------
-\section{L'inscription et l'identification}
+\section{Gestion des utilisateurs}
+Pour la gestion des utilisateurs il y a deux fonctionnalités
+principales. Celles-ci ont été adaptés de code produit en TD lors du
+premier semestre.
 
+\subsection{Inscription}
+Pour l'inscription, l'utilisteur remplit les champs qui lui sont
+demandés avec ses informations. A la validation du formulaire, un
+identifiant unique (UUID dans la base de données) est créé. Il permet
+d'identifié le client. Un email est envoyé au client contenant une URL
+unique avec cet UUID (fonction neutralisée pour ne pas encombrer les
+serveurs du cremi mais réactivable simplement dans le code).
+
+\subsection{Identification}
+Un utilisateur inscrit peut alors s'identifier. La page principale du
+site sert cette fonctionnalité. Lorsque l'utilisateur saisie ses
+identifiants, on vérifie sa présence dans la base de données (le login
+est unique et sert de clé primaire pour la table Users). Si il existe,
+on récupère ses données pour les mettre dans la session et on lui
+donne accès aux fonctionnalités du site.
+
+Lors d
 %-------------------------------------------------------------------------------
 % Le service liste de services
 %-------------------------------------------------------------------------------
@@ -235,7 +259,7 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 \subsection{Les fichiers de modèles}
 \subsubsection{classFaq.php}
 Cette class permet de créer l'objet FAQ qui regroupe toutes les questions et réponses stocké dans la base de donnée.
-\begin{minted}{PHP}
+\begin{minted}{php}
   <?php
         include_once('classQuestion.php');
 	include_once('classReponse.php');
@@ -295,7 +319,7 @@ Cette class permet de créer l'objet Reponse qui est liée à la table PrTec\_Re
 \end{minted}
 \subsubsection{modFaq.php}
 Ce fichier permet de créer l'objet faq avec tous les questions et réponse stockés et envoie l'objet FAQ aux controller faq.
-\begin{minted}{php}
+\begin{minted}[breaklines]{php}
 <?php
 // Accès aux données
 include_once('classFaq.php');
@@ -338,7 +362,7 @@ Le fichier faq.php est le controleur de se service, il permet de récupérer les
 Ce fichier est la vue de la faq, elle affiche les questions et les réponses de chaques questions dans des panels boostrap.
 Elle a des bouttons permettant de poser une question ou de répondre.
 
-\begin{minted}{php}
+\begin{minted}[breaklines]{php}
 <?php
   foreach ($faq->getArrayQ() as $question){
     if( isset($question)){
@@ -443,12 +467,139 @@ Eventuellement, on fait la même chose pour modifier ou supprimer un service. Ce
 %-------------------------------------------------------------------------------
 \section{Livraison du produit}
 
-\subsection{structure de l'archive de livraison}
-
 \subsection{L'installation}
+Pour l'installation du site nous avions pour projet de créer un
+installateur intéractif. Celui-ci permettrai à l'administrateur du
+site de créer de façon simple et rapide tous les éléments nécessaires
+au fonctionnement du site. Voici la structure du site avec cet
+installateur.
+
+\dirtree{%
+  .0 /.
+  .1 admin.
+  .2 controller.php.
+  .2 index.php.
+  .2 install.php.
+  .2 sql.
+  .3 install.sql.
+  .1 LICENCE.
+  .1 README.
+  .1 site.tar.gz.
+}
+
+L'administrateur doit aller sur la page admin/index.php (en tapant
+l'url + /admin), il tombe alors sur une page (toujours disponible) qui
+lui demande de saisir un certain nombre d'informations comme le nom de
+son projet, le nom de la base de données à créer, le serveur de base
+de données ainsi que des identifiants valables sur celui-ci et un
+super utilisateur à créer pour les fonctions d'administration du
+site. Le dossier sql contien un script permettant de créer la base de
+données (cette partie fonctionne). L'insertion du super utilisateur en
+revanche ne fonctionne pas. Nous n'avons pas eu assez de temps pour
+pouvoir débugger cette fonctionnalité mais il semblerai que celà
+vienne d'une valeur ne correspondant pas au champs de la table.
+
+Cet outil décompresse ensuite le site à la racine du projet. Il était
+prévu de pouvoir choisir ou décompresser le site mais le temps nous
+ayant manqué nous avons décidé de ne pas ajouter cette option. Enfin,
+le script créé le fichier app.ini, se trouvant dans le site
+nouvellement créé dans le répertoire \texttt{site/config/}. Ce fichier
+est appelé par les modèles pour récupérer les informations de la base
+de données. Cette fonction à été testé et est opérationnelle
+également.
+
+\subsubsection{Les problèmes rencontrés}
+Malheureusement, le développement de cette fonctionnalité n'a pas
+aboutit, il reste des bugs à corriger. Certaines opérations restent
+fonctionnelles. Les raisons pour lesquelles nous n'avons pas pu
+implémenter cette fonctionnalité sont principalement le manque de
+temps (nous avons commencé le développement de celui-ci en début de
+semaine pour le vendredi) et la longueur des tests. Toute la structure
+doit être remise à neuf à chaque fois que le programme plante (étant
+donné qu'il créé des fichiers), car les fonctions php utilisées pour
+la décompression ne permettent pas de recréer des fichiers déjà
+créés. Il reste peu de travail pour avoir un script fonctionnel. Bien
+que l'installateur soit très simpliste (peu de possibilité de
+personnalisation à l'installation), son développement à été intéressé
+et éducatif. Nous nous sommes inspirés de projets comme DokuWiki (qui
+possède un installateur similaire en fonctionnalités) pour le créer.
+
+La structure finale du projet est donc la suivante :
+
+\dirtree{%
+  .0 /.
+  .1 admin/.
+  .2 controller.php.
+  .2 index.php.
+  .2 install.php.
+  .2 sql/.
+  .3 install.sql.
+  .1 LICENCE.
+  .1 README.
+  .1 site/.
+  .2 index.php.
+  .2 conf/.
+  .3 app.ini.
+  .2 controller/.
+  .3 action.php.
+  .3 confirm.php.
+  .3 AjouterService.php.
+  .3 Demander.php.
+  .3 faq.php.
+  .3 function.php.
+  .3 login.php.
+  .3 logout.php.
+  .3 ModifierService.php.
+  .3 Repondre.php.
+  .3 services.php.
+  .3 supprimerQRU.php.
+  .3 SupprimerService.php.
+  .2 model/.
+  .3 classFaq.php.
+  .3 classQuestion.php.
+  .3 classReponse.php.
+  .3 conn.php.
+  .3 modDemander.php.
+  .3 modFaq.php.
+  .3 modLogin.php.
+  .3 modRepondre.php.
+  .3 modSupprQRU.php.
+  .3 services.php.
+  .2 view/.
+  .3 AjouterService.php.
+  .3 footer.php.
+  .3 header.php.
+  .3 listServices.php.
+  .3 listusers.php.
+  .3 login.php.
+  .3 ModifierService.php.
+  .3 navbar.php.
+  .3 users.php.
+  .3 users.xsl.
+  .3 vueFAQ.php.
+  .3 welcome.php.
+}
+
+\subsection{La licence}
+Nous avons fait le choix de la licence GNU AGPL pour ce projet. Ce
+choix a été motivé par un désire de proposer notre projet sous licence
+libre. La philosophie de la licence GNU GPL et sa robustesse en font
+une licence intéressante pour les projets libres. Nous voulions aussi
+que le logiciel reste libre (pas de possibilité de se l'approprier
+pour en faire un logiciel propriétaire). La licence AGPL est un dérivé
+de la licence GPL spécialement conçue pour ce genre de projets. Elle
+permet à l'utilisateur d'un service en ligne d'avoir accès au code
+source (ce que la GPL ne requiert pas).
+
 %-------------------------------------------------------------------------------
 % Conclusion
 %-------------------------------------------------------------------------------
 \section{Conclusion du projet}
-
+Ce projet à été un vrai challenge pour notre groupe. Nous avons mis en
+place des outils de développement efficaces. Notre plus grand ennemie
+aura été le temps. Nous avons eu des soucis sur le principe de la
+structuration du code en MVC. Notre site respecte plus ou moins ce
+design pattern mais il reste des incohérences à corriger. Nous avons
+aussi eu beaucoup de soucis concernant la base de données (située au
+CREMI sur le compte de l'un d'entre nous). 
 \end{document}
