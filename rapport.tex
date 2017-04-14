@@ -203,6 +203,9 @@ Le ‘controller/services.php’ est le fichier principal qui contrôle l’éch
 
 Le bout de code PHP du ‘controller’est le suivant :
 \begin{minted}{php}
+<?php
+[...]
+
 	/* Call the model */
  	require('../model/services.php');
 
@@ -211,6 +214,7 @@ Le bout de code PHP du ‘controller’est le suivant :
 
 	/* Show the services via the view */
 	require('../view/listServices.php');
+?>
 \end{minted}
 
 Donc, après avoir appelé le ‘model’, on obtient la liste des service depuis la base de données dans un tableau qu’on l’affiche élément par élément en appelant le ‘view/listeService.php’.
@@ -341,19 +345,14 @@ Elle a des bouttons permettant de poser une question ou de répondre.
       echo '<div class="panel panel-primary">';
       echo '<div class="panel-heading">Question de '.$question->getAuteur().': '.$question->getQuestion().' Poster le '.$question->getdate().'</p></div>';
       echo '<div class="panel-body">';
-      foreach ($faq->getReponseQuestion($question) as $reponse){
+    foreach ($faq->getReponseQuestion($question) as $reponse){
 	if(isset($reponse)){
 	  echo '<h3>Reponse de '.$reponse->getAuteur().':</h3>';
 	  echo '<p>'.$reponse->getReponse().'<br />';
 	  echo 'repondu le '.$reponse->getdate().'</p>';
           if($_SESSION['droit'] == 1)
-<<<<<<< HEAD
-          echo '<a href="../controller/supprimerQRU.php?id='.$reponse->getReponseID().'&value=1" > <button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';
-
-=======
           echo '<a href="../controller/supprimerQRU.php?id='.$reponse->getReponseID().'&value=1" > <button type="submit" class="btn btn-danger"> supprimer la réponse</button></a>';//boutton repondre
-	  
->>>>>>> a9960b3add41e550c73f963c1eadf8fe7c0bc2bd
+
 	}
       }
       echo '<form method="POST" action="../controller/Repondre.php?id='.$question->getID().'">';
@@ -366,15 +365,8 @@ Elle a des bouttons permettant de poser une question ou de répondre.
       echo'</div>';
       echo '<br />';
     }
-<<<<<<< HEAD
-
   }
-  ?>
-=======
-    
-  } 
 ?>
->>>>>>> a9960b3add41e550c73f963c1eadf8fe7c0bc2bd
 \end{minted}
 
 %-------------------------------------------------------------------------------
@@ -382,7 +374,70 @@ Elle a des bouttons permettant de poser une question ou de répondre.
 %-------------------------------------------------------------------------------
 \section{L'interface Admin}
 
+Afin de permettre aux administrateurs de gérer les services et les questions/réponses, on avait implémenté une interface ‘php’ consistant des boutons structurés comme suivant :
 
+\begin{itemsize}
+\item Un bouton dans le ‘navbar’ qui sert à ajouter un service.
+\item deux boutons insérés dans chaque élément ‘service’ dans ‘listeService.php’ qui servent à modifier ou supprimer des services.
+\end{itemsize}
+
+Ces boutons ne s’apparaissent que si le droit d’utilisateur est à 1 dans la base de données pour indiquer que c’est bien l’administrateur du site.
+Le code permettant à vérifier est le suivant :
+\begin{minted}{php}
+<?php
+[...]
+if($_SESSION['droit']) {
+		$link_modif = "../controller/services.php?service_id=" . urlencode($id);
+		$link_delete = "../controller/SupprimerService.php?service_id=" . urlencode($id);
+		$url_modif = htmlspecialchars($link_modif);
+		$url_delete = htmlspecialchars($link_delete);
+		$modif_button = '<a href='. $url_modif .' class="btn btn-success" role="button">Modifier un Service</a>';
+		$delete_button = '<a href='. $url_delete .' class="btn btn-danger" role="button">Supprimer un Service</a>';
+}
+[...]
+?>
+\end{minted}
+
+On fait la même chose avec le boutton de l'ajout des services
+.
+Pour implémenter cet interface on avait créer les fichiers PHP dans 'controller', 'model', 'view' :
+\subsection{Ajouter un Service}
+Pour l'ajout d'un service, on répartie les fichiers comme suivants :
+
+\subsubsection{Le Controller}
+Dès que l'administrateur veut ajouter un service, la 'view' va appeller le fichier 'controller/AjouterService.php' après la récupération des données :
+
+\begin{minted}[breakline]{php}
+<?php
+[...]
+/* Build the data array for the model */
+$Post_array = array(
+		'categorie' => $_POST["categorie"],
+		'auteur' => $_POST["auteur"],
+		'adresse' => $_POST["adresse"],
+		'date' => $_POST["date"],
+		'lieu' => $_POST["lieu"],
+		'contenu' => $_POST["contenu"]
+);
+
+$phptime = strtotime($_POST['date']);
+$mysqltime = date ("Y-m-d H:i:s", $phptime);
+
+/* Call the model */
+require ('../model/services.php');
+$result = add_service($Post_array['categorie'], $Post_array['auteur'], $Post_array['adresse'], $mysqltime, $Post_array['lieu'], $Post_array['contenu']);
+
+[...]
+?>
+\end{minted}
+\subsubsection{Le Model}
+Le 'model' sera appelé par le controller pour ajouter un service à l'aide de la fonction add_service qui est dans 'model/services.php'
+Alors, si le model arrive à insérer un service. On va retouruner vers le controller qui vas nous ammener vers le controller principal 'controller/services.php'
+
+\subsubsection{La view}
+Le fichier qui s'occupe d'afficher la form pour ajouter un service est le suivant : 'view/AjouterService.php'
+
+Eventuellement, on fait la même chose pour modifier ou supprimer un service. Cependant on a besoin de l'id du service que l'on récupère avec le boutton de modification ou la suppression.
 %-------------------------------------------------------------------------------
 % La livraison
 %-------------------------------------------------------------------------------
