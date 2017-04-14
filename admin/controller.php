@@ -14,8 +14,8 @@ if (isset($_POST['project_name']) && isset($_POST['dbserv']) && isset($_POST['db
     include_once('install.php');
     
     $funs = new AdminFunctionnalities();
-    /* $success = $funs->createDatabase($dbserv,$dbname,$dbuser,$dbpass);
-       $success = $funs->createSuperUser($suname, $supass); */
+    $success = $funs->createDatabase($dbserv,$dbname,$dbuser,$dbpass);
+    $success = $funs->createSuperUser($suname, $supass); 
     /* Decompress site */
     $tar = new PharData('../site.tar.gz');
     /* creates site.tar */

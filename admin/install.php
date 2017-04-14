@@ -34,7 +34,6 @@ class AdminFunctionnalities {
         $this->dbuser = $user;
         $this->pass = $password;
         $sql = file_get_contents ("sql/install.sql");
-        $ret = 0;
         try {
             $conn = $this->connectDB();
             $conn->exec("CREATE DATABASE `$name`;\n") or die(print($conn->errorInfo()));
@@ -58,11 +57,22 @@ class AdminFunctionnalities {
 	     */
     function createSuperUser($name, $pass)
     {
-		$sql = file_get_contents ("");
 		$ret = 0;
 		try {
             $conn = $this->connectDB();
-            
+            $conn->exec("INSERT INTO `mmassamire`.`PrTec_Users` (
+`login` ,
+`nom` ,
+`prenom` ,
+`tel` ,
+`birthdate` ,
+`email` ,
+`password` ,
+`droits`
+)
+VALUES (
+'$name', NULL , NULL , '', '', NULL , '$pass', '1'
+);"
 		}
 		catch (PDOException $err) {
 		    echo "La création du super utilisateur a échouée " . $err->getMessage();
