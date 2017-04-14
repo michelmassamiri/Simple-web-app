@@ -180,6 +180,7 @@ Pour le service FAQ, les tables de la base relié a se service sont les tables P
 %-------------------------------------------------------------------------------
 \section{L'inscription et l'identification}
 
+Lors d
 %-------------------------------------------------------------------------------
 % Le service liste de services
 %-------------------------------------------------------------------------------
@@ -201,7 +202,7 @@ Pour cela, le service est codé avec plusieurs fichiers qui soit:
 \subsection{Les fichiers de modèles}
 \subsubsection{classFaq.php}
 Cette class permet de créer l'objet FAQ qui regroupe toutes les questions et réponses stocké dans la base de donnée.
-\begin{minted}{PHP}
+\begin{minted}{php}
   <?php
         include_once('classQuestion.php');
 	include_once('classReponse.php');
@@ -261,7 +262,7 @@ Cette class permet de créer l'objet Reponse qui est liée à la table PrTec\_Re
 \end{minted}
 \subsubsection{modFaq.php}
 Ce fichier permet de créer l'objet faq avec tous les questions et réponse stockés et envoie l'objet FAQ aux controller faq.
-\begin{minted}{php}
+\begin{minted}[breaklines]{php}
 <?php
 // Accès aux données
 include_once('classFaq.php');
@@ -304,7 +305,7 @@ Le fichier faq.php est le controleur de se service, il permet de récupérer les
 Ce fichier est la vue de la faq, elle affiche les questions et les réponses de chaques questions dans des panels boostrap.
 Elle a des bouttons permettant de poser une question ou de répondre.
 
-\begin{minted}{php}
+\begin{minted}[breaklines]{php}
 <?php
   foreach ($faq->getArrayQ() as $question){
     if( isset($question)){
